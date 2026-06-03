@@ -78,12 +78,12 @@ export default function LoadingScreen() {
                 
                 {/* Texte LOADING */}
                 <div 
-                    className="text-5xl md:text-6xl font-black text-white/40 tracking-[0.1em]"
+                    className="text-5xl md:text-6xl font-black text-white/40 tracking-[0.1em] animate-pulse"
                     style={{ fontFamily: "var(--font-outfit), sans-serif" }}
                 >
                     LOADING...
                 </div>
-                <p className="text-red-500 text-center animate-pulse">If it doesn't start, please refresh the page</p>
+                {/* <p className="text-red-500 text-center animate-pulse">If it doesn't start, please refresh the page</p> */}
 
             </div>
         </div>

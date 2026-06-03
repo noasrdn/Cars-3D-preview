@@ -381,25 +381,12 @@ export default function Scene3D({ activeIndex, direction }: Scene3DProps) {
             <OrbitControls
                 ref={controlsRef}
                 makeDefault
-                enabled={orbitEnabled}
+                enableRotate={false}
+                enablePan={false}
                 enableZoom={false}
                 target={[-0.49, 1.48, -0.39]}
                 enableDamping={true}
                 dampingFactor={0.05}
-                minDistance={2}
-                maxDistance={15}
-                onChange={(e) => {
-                    if (e?.target) {
-                        const cam = e.target.object.position;
-                        const tar = e.target.target;
-                        console.log(
-                            `📸 COPIER CE BLOC POUR CanvasContainer :\n` +
-                            `camera={{ position: [${cam.x.toFixed(2)}, ${cam.y.toFixed(2)}, ${cam.z.toFixed(2)}] }}\n\n` +
-                            `🎯 COPIER CE BLOC POUR OrbitControls :\n` +
-                            `target={[${tar.x.toFixed(2)}, ${tar.y.toFixed(2)}, ${tar.z.toFixed(2)}]}`
-                        );
-                    }
-                }}
             />
 
             <group ref={parallaxGroupRef}>
