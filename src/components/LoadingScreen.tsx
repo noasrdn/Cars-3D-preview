@@ -81,7 +81,7 @@ export default function LoadingScreen() {
                     className="text-5xl md:text-6xl font-black text-white/40 tracking-[0.1em] animate-pulse"
                     style={{ fontFamily: "var(--font-outfit), sans-serif" }}
                 >
-                    LOADING...
+                    Loading...
                 </div>
                 {/* <p className="text-red-500 text-center animate-pulse">If it doesn't start, please refresh the page</p> */}
 
