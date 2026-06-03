@@ -1,26 +1,146 @@
+/* 1. L'unique directive d'importation de Tailwind v4 */
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
+/* 2. Vos styles globaux (anciennement @layer base) se mettent directement sur les balises */
+html,
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #09090b;
+  color: #ffffff;
+  overflow: hidden;
+  font-family: sans-serif;
+}
+
+/* -------------------------------------
+   3D CAR ANNOTATIONS
+   ------------------------------------- */
+
+.car-annotation {
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: white;
+  user-select: none;
+  pointer-events: none;
+  /* Origin is exactly at the 3D position */
+}
+
+.car-annotation .annotation-svg {
+  position: absolute;
+  width: 200px;
+  height: 80px;
+  left: -200px;
+  top: -80px;
+  pointer-events: none;
+  overflow: visible;
+  display: block;
+}
+
+.car-annotation[data-align="right"] .annotation-svg {
+  left: 0px; /* SVG starts at the dot and extends to the right */
+  top: -80px;
+}
+
+.car-annotation .annotation-content {
+  position: absolute;
+  right: 100px; /* Aligns with the end of the horizontal SVG line (100px from left of 200px SVG) */
+  bottom: 80px; /* Align with top of the SVG where the horizontal line is */
+  padding-bottom: 4px; /* Small gap between text and line */
+  text-align: right;
+  white-space: nowrap; /* EMPÊCHE LE TEXTE DE SE COMPRESSER VERTICALEMENT */
+}
+
+.car-annotation[data-align="right"] .annotation-content {
+  right: auto;
+  left: 100px; /* Text starts where the diagonal line meets the horizontal line (100px to the right of the dot) */
+  text-align: left;
+}
+
+.car-annotation .annotation-title {
+  font-weight: 800;
+  font-size: 1.5rem;
+  letter-spacing: 0.05em;
+  margin-bottom: 2px;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+  font-style: italic;
+  text-transform: uppercase;
+}
+
+.car-annotation .annotation-desc {
+  font-weight: 500;
+  font-size: 0.8rem;
+  color: #e4e4e7;
+  letter-spacing: 0.05em;
+  text-shadow: 0 1px 5px rgba(0,0,0,0.8);
+  text-transform: uppercase;
+}
+
+/* 3. Vos utilitaires personnalisés (l'équivalent de @layer utilities) */
+@utility font-outline {
+  -webkit-text-stroke: 2px white;
+  color: transparent;
+}
+
+/* Animations de balancement (vent) pour les branches de sakura */
+@keyframes wind-sway-tl-1 {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  50% { transform: translate(0.6vw, 0.4vh) rotate(1deg); }
+}
+@keyframes wind-sway-tl-2 {
+  0%, 100% { transform: translate(0, 0) rotate(35deg); }
+  50% { transform: translate(0.4vw, 0.8vh) rotate(36.5deg); }
+}
+
+@keyframes wind-sway-tr-1 {
+  0%, 100% { transform: translate(0, 0) scaleX(-1) rotate(180deg); }
+  50% { transform: translate(-0.6vw, 0.4vh) scaleX(-1) rotate(183deg); }
+}
+@keyframes wind-sway-tr-2 {
+  0%, 100% { transform: translate(0, 0) scaleX(-1) rotate(135deg); }
+  50% { transform: translate(-0.4vw, 0.8vh) scaleX(-1) rotate(133deg); }
+}
+
+@keyframes wind-sway-bl-1 {
+  0%, 100% { transform: translate(0, 0) rotate(45deg); }
+  50% { transform: translate(0.8vw, -0.4vh) rotate(43deg); }
+}
+@keyframes wind-sway-bl-2 {
+  0%, 100% { transform: translate(0, 0) rotate(15deg); }
+  50% { transform: translate(0.6vw, -0.6vh) rotate(13deg); }
+}
+
+@keyframes wind-sway-br-1 {
+  0%, 100% { transform: translate(0, 0) scaleX(-1) rotate(-45deg); }
+  50% { transform: translate(-0.8vw, -0.4vh) scaleX(-1) rotate(-43deg); }
+}
+@keyframes wind-sway-br-2 {
+  0%, 100% { transform: translate(0, 0) scaleX(-1) rotate(180deg); }
+  50% { transform: translate(-0.6vw, -0.6vh) scaleX(-1) rotate(183deg); }
+}
+
+
+@utility animate-wind-tl-1 {
+  animation: wind-sway-tl-1 6s ease-in-out infinite;
+}
+@utility animate-wind-tl-2 {
+  animation: wind-sway-tl-2 7s ease-in-out infinite;
+}
+@utility animate-wind-tr-1 {
+  animation: wind-sway-tr-1 5.5s ease-in-out infinite;
+}
+@utility animate-wind-tr-2 {
+  animation: wind-sway-tr-2 6.5s ease-in-out infinite;
+}
+@utility animate-wind-bl-1 {
+  animation: wind-sway-bl-1 6.8s ease-in-out infinite;
+}
+@utility animate-wind-bl-2 {
+  animation: wind-sway-bl-2 7.2s ease-in-out infinite;
+}
+@utility animate-wind-br-1 {
+  animation: wind-sway-br-1 5.8s ease-in-out infinite;
+}
+@utility animate-wind-br-2 {
+  animation: wind-sway-br-2 6.2s ease-in-out infinite;
 }
